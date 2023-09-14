@@ -1,5 +1,15 @@
 # Basics Of Blockchain and Ethereum
 
+## Resources
+ - [Ethereum Official Documentation](https://ethereum.org/en/developers/docs/)
+ - [Solidity Official Documentation](https://docs.soliditylang.org/en/v0.8.21/)
+ - [Mastering Ethereum Book](https://github.com/ethereumbook/ethereumbook)
+ - [Ethereum Whitepaper](https://ethereum.org/en/whitepaper/)
+
+## Documentation of My Learning
+
+### Day 1 - Day 4
+
 - ``Pragma is used on top of every solidity smart contract to specify the version of solidity``
 
     ```sh
@@ -142,3 +152,102 @@ function function_name(uint arg1, int arg2, string arg3, ...) <access> <type> {
         // code
     }
     ```
+
+- **payable** : A payable function enables the ability of a function to perform transaction on the blockchain. Payable function definitely costs gas.
+
+    ```sh
+    function payableFunction() public payable {
+        // code here
+    }
+    ```
+
+## Mappings in solidity
+
+Unlike other programming languages like Javascript or Python, we cannot directly create a map to store a key value pairs in Solidity. We should declare the mappings by ourselves.
+
+```sh
+mapping(key_data_type => value_data_type) <access> mapName;
+```
+
+Example: 
+
+```sh
+mapping(uint256 => string) public intToStringMapping;
+```
+
+## Data Locations
+
+Data Locations are special commands that can be added to array, struct and mappings to specify whether the value should be stored temporarily or permanently in a blockchain.
+
+### Temporary Variables
+- **calldata** : Calldata is data location given to variables whose values cannot be modified(immutable). The value stored with calldata are temporary.
+
+```sh
+string calldata myString;
+```
+
+- **memory** : Memory is a data location given to a variable whose value can be modified (mutable). The value stored with memory are also temporary.
+
+```sh
+string memory myString;
+```
+
+### Permanent Variables
+
+- **storage** : Storage is data location, which stores the value of a variable in the storage permanently. The value of the variable specified as storage are mutable.
+
+```sh
+string storage myString;
+```
+
+Stack, Code and Logs data locations will be documented later after learning in detail.
+
+## Imports in Solidity
+
+In solidity, a smart contract written in a separate file can be imported to the other by using the `import` keyword followed by the path of the solidity smart contract. Imports are generally specified on top of the file below pragma.
+
+```sh
+import './SmartContract1.sol';
+import './SmartContract2.sol';
+```
+
+## Instances of contract
+
+An instance of contract can be created, which returns the address of the contract, whose object is created. `new` keyword is used for allocation.
+
+```sh
+SimpleContract simpleContract = new SimpleContract();
+```
+
+## Inheritance and Overriding
+
+**Inheritance** : A solidity contract is able to inherit other contract. `is` keyword is used for inheritance.
+
+```sh
+contract ExtendedContract is BaseContract {
+    // Code
+}
+```
+
+**Override**: A function defined in the parent contract can be overridden in the child contract. To achieve this, `override` keyword is used. Some important points to note are:
+
+- A function can be overridden only if it is defined as a ***virtual*** function in the parent contract. It can be defined as 
+
+```sh
+contract BaseContract {
+    function functn() public virtual{
+        // Code 
+    }
+}
+```
+- ***override*** keyword must be used in the children contracts to override an existing function and define it in a new way.
+
+```sh
+contract ExtendedContract is BaseContract {
+    function functn() public override{
+        // Code
+    }
+}
+```
+
+### Day 5 
